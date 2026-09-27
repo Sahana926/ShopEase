@@ -1,0 +1,14 @@
+.checkout-header-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #4b2e22;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  padding-bottom: 0.5rem;
+}
+
+.checkout-header-sticky header {
+  max-width: 1200px;
+  margin: 0 auto;
+  color: #fff;
+} 
