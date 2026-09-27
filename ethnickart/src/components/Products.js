@@ -1888,7 +1888,15 @@ const Products = () => {
                   transform: 'translateY(-4px) scale(1.03)',
                 },
               }}>
-                <img src={prod.image || 'https://via.placeholder.com/300x200?text=No+Image'} alt={prod.name} style={{ width: '100%', height: '180px', objectFit: 'cover', borderRadius: '10px' }} />
+                <img 
+                  src={prod.image || 'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=500&auto=format&fit=crop'} 
+                  alt={prod.name} 
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = 'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=500&auto=format&fit=crop';
+                  }}
+                  style={{ width: '100%', height: '180px', objectFit: 'cover', borderRadius: '10px' }} 
+                />
                 <div style={{ color: '#ff9900', fontWeight: 600, margin: '0.5rem 0 0.5rem', fontSize: '1.08rem' }}>★ {prod.rating}</div>
                 <h2 style={{ margin: '0 0 0.5rem', fontSize: '1.2rem', color: '#a76f3f', textAlign: 'center' }}>{prod.name}</h2>
                 <div style={{ fontWeight: 700, fontSize: '1.1rem', color: '#6b3e26', marginBottom: '0.5rem' }}>₹{prod.price}</div>

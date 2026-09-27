@@ -206,7 +206,15 @@ const Home = () => {
             onMouseEnter={e => e.currentTarget.style.boxShadow = '0 8px 32px rgba(167,111,63,0.18)'}
             onMouseLeave={e => e.currentTarget.style.boxShadow = '0 4px 18px rgba(167,111,63,0.10)'}
             >
-              <img src={prod.image || 'https://via.placeholder.com/300x200?text=No+Image'} alt={prod.name} style={{ width: 130, height: 130, objectFit: 'cover', borderRadius: 14, marginBottom: 18, boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }} />
+              <img 
+                src={prod.image || 'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=500&auto=format&fit=crop'} 
+                alt={prod.name} 
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = 'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=500&auto=format&fit=crop';
+                }}
+                style={{ width: 130, height: 130, objectFit: 'cover', borderRadius: 14, marginBottom: 18, boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }} 
+              />
               <div style={{ fontWeight: 700, fontSize: '1.13rem', color: '#a76f3f', textAlign: 'center', marginBottom: 8 }}>{prod.name}</div>
               <div style={{ color: '#ff9900', fontWeight: 600, marginBottom: 8, fontSize: '1.08rem' }}>★ {prod.rating}</div>
               <div style={{ fontWeight: 700, fontSize: '1.13rem', color: '#6b3e26', marginBottom: 8 }}>₹{prod.price}</div>

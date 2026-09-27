@@ -280,7 +280,7 @@ router.post('/products', async (req, res) => {
   }
 });
 
-// Get all products (auto-seeds if database is empty)
+// Get all products (auto-seeds & ensures image URLs)
 router.get('/products', async (req, res) => {
   try {
     let products = await Product.find();
@@ -289,7 +289,17 @@ router.get('/products', async (req, res) => {
       await Product.insertMany(productsData);
       products = await Product.find();
     }
-    res.json({ products });
+    const productsData = require('../productsData');
+    const imageMap = {};
+    productsData.forEach(p => { if (p.image) imageMap[p.name] = p.image; });
+    const formattedProducts = products.map(p => {
+      const obj = p.toObject ? p.toObject() : p;
+      if (!obj.image || obj.image.includes('via.placeholder.com')) {
+        obj.image = imageMap[obj.name] || 'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=500&auto=format&fit=crop';
+      }
+      return obj;
+    });
+    res.json({ products: formattedProducts });
   } catch (err) {
     res.status(500).json({ message: 'Server error', error: err.message });
   }

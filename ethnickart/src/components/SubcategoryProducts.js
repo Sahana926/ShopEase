@@ -162,7 +162,15 @@ const SubcategoryProducts = () => {
                 transition: 'box-shadow 0.2s',
                 opacity: loading ? 0.6 : 1
               }}>
-                <img src={prod.image} alt={prod.name} style={{ width: '100%', height: '180px', objectFit: 'cover', borderRadius: '10px' }} />
+                <img 
+                  src={prod.image || 'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=500&auto=format&fit=crop'} 
+                  alt={prod.name} 
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = 'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=500&auto=format&fit=crop';
+                  }}
+                  style={{ width: '100%', height: '180px', objectFit: 'cover', borderRadius: '10px' }} 
+                />
                 <h2 style={{ margin: '1rem 0 0.5rem', fontSize: '1.2rem', color: '#a76f3f', textAlign: 'center' }}>{prod.name}</h2>
                 <div style={{ fontWeight: 700, fontSize: '1.1rem', color: '#6b3e26', marginBottom: '0.5rem' }}>₹{prod.price}</div>
                 <div style={{ color: '#ff9900', fontWeight: 600, marginBottom: '1rem' }}>★ {prod.rating}</div>
