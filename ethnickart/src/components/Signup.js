@@ -1,8 +1,6 @@
 import { API_BASE } from '../api';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import Header from './Header';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import '../css/Signup.css';
 
 const Signup = ({ onSwitchToLogin, onSignupSuccess, onBackToHome }) => {

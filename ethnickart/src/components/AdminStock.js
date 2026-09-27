@@ -99,14 +99,12 @@ const AdminStock = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
-  const [editStocks, setEditStocks] = useState({});
   const navigate = useNavigate();
 
   // Fetch products from backend
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const token = localStorage.getItem('adminToken');
         const res = await fetch(`${API_BASE}/api/admin/products`);
         if (!res.ok) throw new Error('Unauthorized or Failed to fetch');
         const data = await res.json();
@@ -133,7 +131,6 @@ const AdminStock = () => {
 
   // Update stock in backend
   const handleUpdateStock = async (prod) => {
-    const token = localStorage.getItem('adminToken');
     try {
       const res = await fetch(`${API_BASE}/api/admin/products/${prod._id}`, {
         method: 'PUT',

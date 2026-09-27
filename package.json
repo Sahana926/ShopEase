@@ -1,9 +1,9 @@
 {
-  "name": "ethnickart",
+  "name": "ethnickart-root",
   "version": "1.0.0",
-  "description": "Ethnickart full-stack ecommerce application",
   "private": true,
   "scripts": {
-    "dev": "echo \"Use the backend and frontend folders separately\""
+    "start": "npm --prefix backend start",
+    "build": "npm --prefix ethnickart run build"
   }
 }

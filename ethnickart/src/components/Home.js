@@ -109,7 +109,6 @@ const Home = () => {
     }
     setError('');
     const product = featured[idx];
-    const productId = getProductId(product);
     const productToSend = { ...product };
     if (product._id && !product.id) productToSend.id = product._id;
     if (product.id && !product._id) productToSend._id = product.id;

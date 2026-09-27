@@ -3,8 +3,6 @@ import React, { useState, createContext, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
 import Signup from './components/Signup';
-import Login from './components/Login';
-import logo from './logo.png';
 import Home from './components/Home';
 import AdminStock from './components/AdminStock';
 import AdminDashboard from './components/AdminDashboard';
