@@ -16,7 +16,21 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => console.log('MongoDB Connected'))
+  .then(async () => {
+    console.log('MongoDB Connected');
+    try {
+      const Product = require('./models/Product');
+      const count = await Product.countDocuments();
+      if (count === 0) {
+        console.log('Auto-seeding initial products catalog...');
+        const productsData = require('./productsData');
+        await Product.insertMany(productsData);
+        console.log('Product catalog auto-seeded successfully!');
+      }
+    } catch (e) {
+      console.error('Auto-seed check failed:', e.message);
+    }
+  })
   .catch((err) => console.error('MongoDB connection error:', err));
 
 app.get('/health', (req, res) => {

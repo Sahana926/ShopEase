@@ -280,10 +280,15 @@ router.post('/products', async (req, res) => {
   }
 });
 
-// Get all products
+// Get all products (auto-seeds if database is empty)
 router.get('/products', async (req, res) => {
   try {
-    const products = await Product.find();
+    let products = await Product.find();
+    if (!products || products.length === 0) {
+      const productsData = require('../productsData');
+      await Product.insertMany(productsData);
+      products = await Product.find();
+    }
     res.json({ products });
   } catch (err) {
     res.status(500).json({ message: 'Server error', error: err.message });
