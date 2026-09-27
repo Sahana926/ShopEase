@@ -175,12 +175,23 @@ router.post('/cart/update-quantity', async (req, res) => {
     res.status(500).json({ message: 'Server error', error: err.message });
   }
 });
-// Get cart
+// Get cart (ensures image URLs for all items)
 router.get('/cart', async (req, res) => {
   const { email } = req.query;
   try {
     let cart = await Cart.findOne({ email });
-    res.json({ cart: cart ? cart.items : [] });
+    const items = cart ? cart.items : [];
+    const productsData = require('../productsData');
+    const imageMap = {};
+    productsData.forEach(p => { if (p.image) imageMap[p.name] = p.image; });
+    const formattedItems = items.map(item => {
+      const obj = item.toObject ? item.toObject() : item;
+      if (!obj.image || obj.image.includes('via.placeholder.com')) {
+        obj.image = imageMap[obj.name] || 'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=500&auto=format&fit=crop';
+      }
+      return obj;
+    });
+    res.json({ cart: formattedItems });
   } catch (err) {
     res.status(500).json({ message: 'Server error', error: err.message });
   }
@@ -217,12 +228,23 @@ router.post('/wishlist/remove', async (req, res) => {
     res.status(500).json({ message: 'Server error', error: err.message });
   }
 });
-// Get wishlist
+// Get wishlist (ensures image URLs for all items)
 router.get('/wishlist', async (req, res) => {
   const { email } = req.query;
   try {
     let wishlist = await Wishlist.findOne({ email });
-    res.json({ wishlist: wishlist ? wishlist.items : [] });
+    const items = wishlist ? wishlist.items : [];
+    const productsData = require('../productsData');
+    const imageMap = {};
+    productsData.forEach(p => { if (p.image) imageMap[p.name] = p.image; });
+    const formattedItems = items.map(item => {
+      const obj = item.toObject ? item.toObject() : item;
+      if (!obj.image || obj.image.includes('via.placeholder.com')) {
+        obj.image = imageMap[obj.name] || 'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=500&auto=format&fit=crop';
+      }
+      return obj;
+    });
+    res.json({ wishlist: formattedItems });
   } catch (err) {
     res.status(500).json({ message: 'Server error', error: err.message });
   }

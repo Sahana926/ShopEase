@@ -83,7 +83,15 @@ const Cart = () => {
                 maxWidth: 320,
                 minWidth: 260,
               }}>
-                <img src={prod.image || 'https://via.placeholder.com/300x200?text=No+Image'} alt={prod.name} style={{ width: '100%', maxWidth: 220, height: '160px', objectFit: 'cover', borderRadius: '10px' }} />
+                <img 
+                  src={prod.image || 'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=500&auto=format&fit=crop'} 
+                  alt={prod.name} 
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = 'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=500&auto=format&fit=crop';
+                  }}
+                  style={{ width: '100%', maxWidth: 220, height: '160px', objectFit: 'cover', borderRadius: '10px' }} 
+                />
                 <h2 style={{ margin: '1rem 0 0.5rem', fontSize: '1.1rem', color: '#a76f3f', textAlign: 'center' }}>{prod.name}</h2>
                 <div style={{ fontWeight: 700, fontSize: '1.05rem', color: '#6b3e26', marginBottom: '0.5rem' }}>₹{prod.price}</div>
                 <div style={{ color: '#6b3e26', fontWeight: 500 }}>Qty: {prod.quantity || 1}</div>
