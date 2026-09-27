@@ -5,11 +5,7 @@ const cors = require('cors');
 
 const app = express();
 app.use(express.json());
-app.use(
-  cors({
-    origin: process.env.FRONTEND_ORIGIN || true,
-  })
-);
+app.use(cors());
 app.set('trust proxy', true); // so req.ip works properly
 
 const mongoUri =

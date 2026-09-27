@@ -1,2 +1,3 @@
-export const API_BASE =
-  process.env.REACT_APP_API_URL || 'http://localhost:5002';
+export const API_BASE = (
+  process.env.REACT_APP_API_URL || 'http://localhost:5002'
+).replace(/\/$/, '');
